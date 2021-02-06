@@ -1,13 +1,17 @@
 import React,{useState} from 'react'
 import {Text,View,StyleSheet,TextInput,TouchableOpacity} from "react-native"
-
+import dbh from "./config"
+import * as firebase from "firebase"
 
 export default function Home({navigation}) {
     const [email,setEmail] = useState('');
     const [password,setPassword] = useState('');
 
     const loginHandler = () =>{
-        console.log(email,password)
+        firebase.auth().signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+            navigation.navigate('user');
+        })
     }
 
     return (
